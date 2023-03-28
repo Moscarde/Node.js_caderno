@@ -1,0 +1,13 @@
+<h1>Olá HandleBars</h1>
+<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore libero natus voluptate et neque possimus ex saepe necessitatibus, est facere sequi, eligendi error incidunt atque veniam sapiente doloribus eveniet. Magnam!</p>
+<p>Meu nome é {{user.name}}, tenho {{user.age}} e sonho em ser {{profissao}}</p>
+<br>
+{{#if aproved}}
+<p>Parabéns, seu cadastro foi aprovado!</p>
+{{else}}
+<p>Infelizmente seu cadastro ainda nao foi aprovado</p>
+{{/if}}
+{{#if auth}}
+    <p>Você está autenticado</p>
+    <a href="/dashboard">Clique aqui para acessar a dashboard</a>
+{{/if}}
