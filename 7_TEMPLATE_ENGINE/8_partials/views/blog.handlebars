@@ -1,0 +1,8 @@
+<h1>Veja todos os nossos posts</h1>
+{{#each posts}}
+<div>
+    {{> post}}
+</div>
+{{/each}}
+<p>Categoria:{{this.category}}</p>
+<p><a href="#">Ver post</a></p>
