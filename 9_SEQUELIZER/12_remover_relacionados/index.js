@@ -82,14 +82,13 @@ app.get('/users/edit/:id', function (req, res) {
   const id = req.params.id
 
   User.findOne({
-    raw: true,
+    include: Address,
     where: {
       id: id,
     },
   })
     .then((user) => {
-      console.log(user)
-      res.render('useredit', { user })
+      res.render('useredit', { user: user.get({ plain: true }) })
     })
     .catch((err) => console.log(err))
 })
@@ -144,6 +143,15 @@ app.post('/address/create', function (req, res) {
   Address.create(address)
     .then(res.redirect(`/users/edit/${UserId}`))
     .catch((err) => console.log(err))
+})
+
+app.post('/address/delete', async(req, res) => {
+  const id = req.body.id
+  const UserId = req.body.UserId
+
+  await Address.destroy({ where: { id: id } })
+  
+  res.redirect(`/users/edit/${UserId}`)
 })
 
 // Criar tabelas e rodar o app
