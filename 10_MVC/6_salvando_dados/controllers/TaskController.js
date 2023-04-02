@@ -21,7 +21,7 @@ module.exports = class TaskController {
     static  async showTasks(req, res) {
 
         const tasks = await Task.findAll({ raw: true })
-        
+        console.log(tasks)
         res.render('tasks/all', {tasks})
     }
 }
