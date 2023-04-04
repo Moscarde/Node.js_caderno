@@ -19,9 +19,13 @@ module.exports = class ToughtsController {
             res.redirect('/login')
         }
         
+
+        // salva na variavel apenas a chave setada
+        const toughts = user.Toughts.map(result => result.dataValues)
+        // console.log(toughts)
+
         // model no plural?
-        console.log(user.Toughts)
-        res.render('toughts/dashboard')
+        res.render('toughts/dashboard', {toughts})
     }
 
     static async createTought(req, res) {
