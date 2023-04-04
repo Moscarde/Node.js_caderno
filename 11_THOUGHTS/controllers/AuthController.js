@@ -7,12 +7,49 @@ module.exports = class AuthController {
         res.render('auth/login')
     }
 
+    static async loginPost(req, res) {
+
+        const { email, password } = req.body
+
+        // find user email
+        const user = await User.findOne({ where: { email: email } })
+
+        if (!user) {
+            req.flash('message', 'Usuário não encontrado!')
+            res.render('auth/login')
+
+            return
+        }
+
+        // check password
+
+        const passwordMatch = bcrypt.compareSync(password, user.password)
+
+        if (!passwordMatch) {
+            req.flash('message', 'Senha inválida')
+            res.render('auth/login')
+            return
+        }
+
+        // inicializando sessao
+
+        req.session.userid = user.id
+
+        req.flash('message', `Login realizado com sucesso! ID = ${user.id}`)
+
+        await req.session.save(() => {
+            res.redirect('/')
+        })
+
+    }
+
     static register(req, res) {
         res.render('auth/register')
     }
+
     static async registerPost(req, res) {
         const { name, email, password, confirmpassword } = req.body
-        
+
         // password match validation
         if (password != confirmpassword) {
             req.flash('message', 'As senhas não conferem, tente novamente!')
@@ -22,7 +59,7 @@ module.exports = class AuthController {
         }
 
         // check if user exists
-        const checkIfUserExists = await User.findOne({ where: {email: email}})
+        const checkIfUserExists = await User.findOne({ where: { email: email } })
         if (checkIfUserExists) {
             req.flash('message', 'O email já está em uso!')
             res.render('auth/register')
@@ -35,7 +72,7 @@ module.exports = class AuthController {
         const hashedPassword = bcrypt.hashSync(password, salt)
 
         const user = { name, email, password: hashedPassword }
-        
+
 
         try {
             const createdUser = await User.create(user)
@@ -54,14 +91,6 @@ module.exports = class AuthController {
         }
 
         // res.render('auth/register')
-    }
-
-    static entrar(req, res) {
-        req.session.userid = 1
-
-        req.session.save(() => {
-            res.redirect('/')
-        })
     }
 
     static logout(req, res) {

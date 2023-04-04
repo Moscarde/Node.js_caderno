@@ -13,8 +13,9 @@ const Tought = require('./models/Tought')
 const User = require('./models/User')
 
 // Import Routes
-const toughtsRoutes = require('./routes/toughtsRoutes')
+
 const authRoutes = require('./routes/authRoutes')
+const toughtsRoutes = require('./routes/toughtsroutes')
 
 // Import Controller
 const ToughtController = require('./controllers/ToughtController')
@@ -55,8 +56,6 @@ app.use(express.static('public'))
 
 // Set sessions to res
 app.use((req, res, next) => {
-    // console.log(req.session)
-    console.log(req.session.userid);
 
     if (req.session.userid) {
         res.locals.session = req.session;
