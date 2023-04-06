@@ -4,7 +4,7 @@ module.exports = class ProductController {
     static async showProducts(req, res) {
         const products = await Product.getProducts()
 
-        res.render('products/all', { products })
+        res.render('products/all', {products})
     }
 
     static createProduct(req, res) {
@@ -22,13 +22,5 @@ module.exports = class ProductController {
         product.save()
 
         res.redirect('/products')
-    }
-
-    static async getProduct(req, res) {
-        const id = req.params.id
-
-        const product = await Product.getProductById(id)
-
-        res.render('products/product', { product })
     }
 }
