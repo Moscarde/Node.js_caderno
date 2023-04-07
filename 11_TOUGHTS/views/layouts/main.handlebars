@@ -13,16 +13,19 @@
 
 <body>
     <nav id="navbar">
-        <a href=";" id="logo">
+        <a href="/" id="logo">
             <img src="/img/toughts_logo.png" alt="Toughts">
         </a>
         <ul>
-            <li><a href="/">Pensamentos</a></li>
+
 
             {{#if session.userid }}
+                <li><a href="/toughts/dashboard">Bem vindo, {{session.username}}!</a></li>
+                <li><a href="/">Pensamentos</a></li>
                 <li><a href="/toughts/dashboard">Dashboard</a></li>
                 <li><a href="/logout">Sair</a></li>
             {{else}}
+                <li><a href="/">Pensamentos</a></li>
                 <li><a href="/login">Entrar</a></li>
                 <li><a href="/register">Registar</a></li>
             {{/if}}
@@ -32,9 +35,9 @@
 
     <div class="container">
         {{#if messages.message}}
-            <div class="message">
-                {{messages.message}}
-            </div>
+        <div class="message">
+            {{messages.message}}
+        </div>
         {{/if}}
 
         {{{body}}}

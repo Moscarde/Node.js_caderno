@@ -1,10 +1,17 @@
+:root {
+    --primary-color: #4d95df;
+    --background-color: #121516;
+}
+
 * {
     font-family: Helvetica;
     margin: 0;
     padding: 0;
-    background-color: #222;
+    background-color: var(--background-color);
     color: #fff;
 }
+
+
 
 /* NAVBAR */
 #logo img {
@@ -16,8 +23,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #222;
-    border-bottom: 1px solid #f6982d;
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--primary-color);
 }
 
 #navbar ul {
@@ -36,7 +43,7 @@
 }
 
 #navbar ul li a:hover {
-    color: #f6982d;
+    color: var(--primary-color);
 }
 
 /* CONTAINER */
@@ -68,13 +75,13 @@
 .auth-container h2 {
     margin-bottom: 1em;
     color: #fff;
-    border-left: 4px solid #f6982d;
+    border-left: 4px solid var(--primary-color);
     padding: .3em;
     width: 100px;
 }
 
 .auth-container a {
-    color: #f6982d;
+    color: var(--primary-color);
 }
 
 .form-control {
@@ -92,14 +99,14 @@
 .form-control textarea {
     padding: 7px;
     border-radius: 3px;
-    border: 1px solid #f6982d;
+    border: 1px solid var(--primary-color);
 }
 
 form input[type='submit'],
 .btn {
     background-color: transparent;
-    color: #f6982d;
-    border: 2px solid #f6982d;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
     padding: .5em 1.2em;
     font-size: 1em;
     font-weight: bold;
@@ -112,14 +119,14 @@ form input[type='submit'],
 
 form input[type='submit']:hover,
 .btn:hover {
-    background-color: #f6982d;
+    background-color: var(--primary-color);
     color: #fff;
 }
 
 /* CREATE / EDIT FORM */
 
 .tought-form-container a {
-    color: #f6982d;
+    color: var(--primary-color);
 }
 
 .tought-form-container a:hover {
@@ -129,7 +136,7 @@ form input[type='submit']:hover,
 .tought-form-container h1 {
     margin: 1em 0;
     color: #fff;
-    border-left: 4px solid #f6982d;
+    border-left: 4px solid var(--primary-color);
     padding: .3em;
 }
 
@@ -147,7 +154,7 @@ form input[type='submit']:hover,
 }
 
 .title-container h2 {
-    border-left: 4px solid #f6982d;
+    border-left: 4px solid var(--primary-color);
     padding: 10px;
 }
 
@@ -161,7 +168,7 @@ form input[type='submit']:hover,
 
 .dashboard li {
     padding: 12px;
-    border-bottom: 1px solid #f6982d;
+    border-bottom: 1px solid var(--primary-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -169,7 +176,7 @@ form input[type='submit']:hover,
 
 .dashboard .label {
     font-weight: bold;
-    color: #f6982d;
+    color: var(--primary-color);
     margin-right: 2em;
 }
 
@@ -184,7 +191,7 @@ form input[type='submit']:hover,
 }
 
 .dashboard a {
-    color: #f6982d;
+    color: var(--primary-color);
 }
 
 /* HOME */
@@ -201,7 +208,7 @@ form input[type='submit']:hover,
 }
 
 .home-header span {
-    color: #f6982d;
+    color: var(--primary-color);
 }
 
 .home-header p,
@@ -250,7 +257,7 @@ form input[type='submit']:hover,
 .order-container button:hover,
 .order-container a:hover,
 .order-container i:hover {
-    color: #f6982d;
+    color: var(--primary-color);
     transition: .1s ease-in all;
 }
 
@@ -274,7 +281,7 @@ form input[type='submit']:hover,
 }
 
 .toughts-container span {
-    color: #f6982d;
+    color: var(--primary-color);
 }
 
 /* FOOTER */
@@ -283,10 +290,10 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid #f6982d;
+    border-top: 1px solid var(--primary-color);
 }
 
 footer span {
     font-weight: bold;
-    color: #f6982d;
+    color: var(--primary-color);
 }

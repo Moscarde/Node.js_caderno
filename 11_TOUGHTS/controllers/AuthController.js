@@ -34,6 +34,7 @@ module.exports = class AuthController {
         // inicializando sessao
 
         req.session.userid = user.id
+        req.session.username = user.name
 
         req.flash('message', `Login realizado com sucesso! ID = ${user.id}`)
 
@@ -78,7 +79,7 @@ module.exports = class AuthController {
             const createdUser = await User.create(user)
 
             req.session.userid = createdUser.id
-
+            req.session.username = user.name
 
             req.flash('message', 'Cadastro realizado com sucesso!')
 
