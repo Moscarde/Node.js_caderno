@@ -13,7 +13,7 @@ function Register() {
     const {register} = useContext(Context)
 
     function handleChange(e) {
-        // console.log(e)
+        // get user object content and add new line
         setUser({ ...user, [e.target.name]: e.target.value })
     }
 

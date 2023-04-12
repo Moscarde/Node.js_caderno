@@ -14,8 +14,6 @@ function Message() {
             setMessage(message)
             setType(type)
 
-            console.log(message, type)
-
             setTimeout(() => {
                 setVisibility(false)
             }, 4000)
