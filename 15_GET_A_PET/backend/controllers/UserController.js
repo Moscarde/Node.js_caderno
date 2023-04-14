@@ -105,10 +105,13 @@ module.exports = class UserController {
 
         if (req.headers.authorization) {
             const token = getToken(req)
-            const decoded = jwt.verify(token, 'nossosecret')
-
-            currentUser = await User.findById(decoded.id)
-            currentUser.password = undefined
+            try {
+                const decoded = jwt.verify(token, 'nossosecret')
+                currentUser = await User.findById(decoded.id)
+                currentUser.password = undefined
+            } catch (error) {
+                res.status(404).json({ message: 'Token inválido' })
+            }
         } else {
             currentUser = null
         }
@@ -133,8 +136,6 @@ module.exports = class UserController {
         // Check if user exists
         const token = getToken(req)
         const user = await getUserByToken(token)
-        console.log(user)
-
         // Validations
         const { name, email, phone, password, confirmPassword } = req.body
 
