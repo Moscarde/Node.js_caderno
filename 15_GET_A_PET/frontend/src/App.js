@@ -13,6 +13,7 @@ import Register from './components/pages/Auth/Register'
 import Home from './components/pages/Home'
 import Profile from './components/pages/User/Profile'
 import MyPets from './components/pages/Pets/MyPets'
+import AddPet from './components/pages/Pets/AddPet'
 
 // Context
 import { UserProvider } from './context/UserContext'
@@ -25,6 +26,7 @@ function App() {
 				<Message/>
 				<Container>
 					<Routes>
+						<Route path="/pet/add" element={<AddPet />} />
 						<Route path="/pet/mypets" element={<MyPets />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
