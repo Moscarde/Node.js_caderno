@@ -4,14 +4,17 @@ import styles from './AddPet.module.css'
 
 
 import { useState } from 'react'
-// import { Link } from "react-router-dom"
-import { redirect } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 import useFlashMessage from '../../../hooks/useFlashMessage'
 
 import PetForm from '../../form/PetForm'
 
 function AddPet() {
+    const navigate = useNavigate();
     const [token] = useState(localStorage.getItem('token') || '')
     const { setFlashMessage } = useFlashMessage()
 
@@ -19,10 +22,11 @@ function AddPet() {
         let msgType = 'success'
 
         const formData = new FormData()
-
+        
         await Object.keys(pet).forEach(key => {
             if (key === 'images') {
-                for (let i = 0; pet[key].length; i++) {
+                const qtdImgs = Object.values(pet[key]).length
+                for (let i = 0; i < qtdImgs; i++) {
                     formData.append('images', pet[key][i])
                 }
             } else {
@@ -30,7 +34,7 @@ function AddPet() {
             }
         })
 
-        const data = await api.post('pet/create', formData, {
+        const data = await api.post('pets/create', formData, {
             Authorization: `Bearrer ${JSON.parse(token)}`,
             'Content-Type': 'multipart/form-data'
         })
@@ -43,8 +47,9 @@ function AddPet() {
             })
 
         setFlashMessage(data.message, msgType)
+
         if (msgType !== 'error') {
-            redirect("/pets/mypets");
+            navigate('/pets/mypets');
         }
     }
 

@@ -5,6 +5,7 @@
     margin: 1.2em auto 0;
     text-align: center;
     border-radius: 5px;
+    transition: .5s;
 }
 
 /* Conditionals */
