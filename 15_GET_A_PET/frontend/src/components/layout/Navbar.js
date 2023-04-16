@@ -23,6 +23,9 @@ function Navbar() {
                 {authenticated ? (
                     <>
                         <li>
+                            <Link to='/pets/myadoptions'>Minhas adoções</Link>
+                        </li>
+                        <li>
                             <Link to='/pets/mypets'>Meus Pets</Link>
                         </li>
                         <li>
