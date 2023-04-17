@@ -22,18 +22,26 @@ function PetDetails() {
     }, [id])
 
     async function schedule() {
-        let msgType = 'success'
-        const data = await api.patch(`pets/schedule/${pet._id}`, {
-            Authorization: `Bearer ${JSON.parse(token)}`
-        }).then(res => {
-            return res.data
-        }).catch(err => {
-            msgType = 'error'
-            return err.response.data
-        })
+    let msgType = 'success'
 
-        setFlashMessage(data.message, msgType)
-    }
+    const data = await api
+      .patch(`pets/schedule/${pet._id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data)
+        return response.data
+      })
+      .catch((err) => {
+        console.log(err)
+        msgType = 'error'
+        return err.response.data
+      })
+
+    setFlashMessage(data.message, msgType)
+  }
 
     return (
         <>
