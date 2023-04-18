@@ -2,7 +2,7 @@ import api from '../../../utils/api'
 
 import { useState, useEffect } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import styles from './Dashboard.module.css'
 
@@ -15,6 +15,7 @@ function MyPets() {
     const [pets, setPets] = useState([])
     const [token] = useState(localStorage.getItem('token') || '')
     const { setFlashMessage } = useFlashMessage()
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get('/pets/mypets', {
@@ -33,7 +34,7 @@ function MyPets() {
     async function removePet(id) {
         let msgType = 'success'
 
-        const data = await api.delete(`/pets/${id}`, {
+        const data = await api.delete(`/pets/${id}`, {}, {
             headers: {
                 Authorization: `Bearer ${JSON.parse(token)}`
             }
@@ -56,7 +57,7 @@ function MyPets() {
     async function concludeAdoption(id) {
         let msgType = 'success'
 
-        const data = await api.patch(`/pets/conclude/${id}`, {
+        const data = await api.patch(`/pets/conclude/${id}`, {},{
             headers: {
                 Authorization: `Bearer ${JSON.parse(token)}`
             }
@@ -66,6 +67,10 @@ function MyPets() {
             msgType = 'error'
             return err.response.data
         })
+
+        if (msgType !== 'error') {
+            navigate('/');
+        }
         
         setFlashMessage(data.message, msgType)
 

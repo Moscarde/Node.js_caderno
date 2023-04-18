@@ -22,26 +22,33 @@ function AddPet() {
         let msgType = 'success'
 
         const formData = new FormData()
-        
-        await Object.keys(pet).forEach(key => {
+
+        const petFormData = await Object.keys(pet).forEach((key) => {
             if (key === 'images') {
                 const qtdImgs = Object.values(pet[key]).length
                 for (let i = 0; i < qtdImgs; i++) {
-                    formData.append('images', pet[key][i])
+                    formData.append(`images`, pet[key][i])
                 }
             } else {
                 formData.append(key, pet[key])
             }
         })
 
-        const data = await api.post('pets/create', formData, {
-            Authorization: `Bearrer ${JSON.parse(token)}`,
-            'Content-Type': 'multipart/form-data'
-        })
-            .then(res => {
-                return res.data
+        formData.append('pet', petFormData)
+
+        const data = await api
+            .post(`pets/create`, formData, {
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(token)}`,
+                    'Content-Type': 'multipart/form-data',
+                },
             })
-            .catch(err => {
+            .then((response) => {
+                console.log(response.data)
+                return response.data
+            })
+            .catch((err) => {
+                console.log(err)
                 msgType = 'error'
                 return err.response.data
             })

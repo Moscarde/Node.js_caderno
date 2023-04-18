@@ -14,34 +14,34 @@ function PetDetails() {
     const { setFlashMessage } = useFlashMessage()
     const [token] = useState(localStorage.getItem('token') || '')
 
-
     useEffect(() => {
-        api.get(`/pets/${id}`).then(res => {
-            setPet(res.data.pet)
+        api.get(`/pets/${id}`).then((response) => {
+            setPet(response.data.pet)
         })
     }, [id])
 
     async function schedule() {
-    let msgType = 'success'
+        let msgType = 'success'
 
-    const data = await api
-      .patch(`pets/schedule/${pet._id}`, {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data)
-        return response.data
-      })
-      .catch((err) => {
-        console.log(err)
-        msgType = 'error'
-        return err.response.data
-      })
+        const data = await api
+            .patch(`pets/schedule/${pet._id}`, {}, {
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(token)}`,
+                },
+            })
+            .then((response) => {
+                console.log(response.data)
+                return response.data
+            })
+            .catch((err) => {
+                console.log(err)
+                msgType = 'error'
+                return err.response.data
+            })
 
-    setFlashMessage(data.message, msgType)
-  }
+        setFlashMessage(data.message, msgType)
+    }
+
 
     return (
         <>
@@ -54,7 +54,7 @@ function PetDetails() {
                     <div className={styles.pet_images}>
                         {pet.images.map((image, index) => (
                             <img
-                                src={`${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`}
+                                src={`${process.env.REACT_APP_API}/images/pets/${pet.images[index]}`}
                                 alt={pet.name}
                                 key={index}
                             />
